@@ -29,55 +29,56 @@ public class FormaPostfixata {
         String result = "";
         Deque<Character> stack = new ArrayDeque<>();
         if(exp.equals(null)){
-			return "This  string is null";
-		}else {
-			for (int i = 0; i <exp.length() ; i++) {
-				char c = exp.charAt(i);
-				if(isOperand(c)){
-					result+= c;
-					System.out.println(result);
-				}
-				//checks if this is an Operator;
-				else if(precedence(c)>0) {
-            		while(!stack.isEmpty() && ((precedence(stack.peek())>precedence(c)) || 
-            				(precedence(stack.peek())==precedence(c) && (precedence(stack.peek())<3)))){
-            		result += stack.peek();
-            		stack.pop();
-                    System.out.println(result);
-            		}
-            		stack.push(c);
-				} 
-				else if(c=='('){
-                    stack.push(c);
-                    System.out.println(result);
-				}
-				else if(c==')'){
-					char x = stack.pop();
-					while(x!='('){
-                    result += x;
-                    x = stack.pop();
-                    System.out.println(result);
-					}
-					System.out.println(result);
-					if(stack.isEmpty()) {
-						return "Error";
-					}
-					if( stack.peek() == '(') {
-						stack.pop();
-					}
-				}
-			}
-			while(!stack.isEmpty()) {
-				char x = stack.pop();
-				result += x;
-				if(x == '(') {
-					return "Error";
-	        	}
+		return "This  string is null";
+	}else {
+		for (int i = 0; i <exp.length() ; i++) {
+			char c = exp.charAt(i);
+			if(isOperand(c)){
+				result+= c;
 				System.out.println(result);
 			}
+			//checks if this is an Operator;
+			else if(precedence(c)>0) {
+            			while(!stack.isEmpty() && ((precedence(stack.peek())>precedence(c)) || 
+            				(precedence(stack.peek())==precedence(c) && (precedence(stack.peek())<3)))){
+            				result += stack.peek();
+            				stack.pop();
+                    			System.out.println(result);
+            			}
+            			stack.push(c);
+			} 
+			else if(c=='('){
+                    		stack.push(c);
+                    		System.out.println(result);
+			}
+			else if(c==')'){
+				char x = stack.pop();
+				while(x!='('){
+                   	 		result += x;
+                    			x = stack.pop();
+                    			System.out.println(result);
+				}
+				System.out.println(result);
+				if(stack.isEmpty()) {
+					return "Error";
+				}
+				if( stack.peek() == '(') {
+					stack.pop();
+				}
+			}
 		}
+		while(!stack.isEmpty()) {
+			char x = stack.pop();
+			result += x;
+			if(x == '(') {
+				return "Error";
+	        	}
+			System.out.println(result);
+		}
+		
+	}
         System.out.println(result);
-		return result;
+	return result;
     }
 
     public static void main(String[] args) {
